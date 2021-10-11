@@ -33,9 +33,9 @@ describe("SignUp Flow", function() {
     cy.get(".signupInputField")
 
 //    click name field & type
-    .type("fakeremail@noemail.com")
-    .should("have.value", "fakeremail@noemail.com")
-
+    .type("fake14email@noemail.com")
+//    iterate #
+    .should("have.value", "fake14email@noemail.com")
 //    click continue
     cy.contains("Continue").click()
 
@@ -57,22 +57,31 @@ describe("SignUp Flow", function() {
     .contains("Password").type("Z987654321#")
 //    add a wait time
     cy.wait(100)
-
-//    pick element
-//    assert the state
     cy.get(".relative > input")
         assert.isNotNull("input > value")
-
 
 //should contain X characters
 //not be visible for security reasons
 
     cy.get('.flex > .rounded').click()
     cy.url()
-        .contains("https://airtable.com")
+        .should("include", "https://www.airtable.com")
 
-//        Next Steps
-//        user is logged in
+        //        Next Steps
+//        Get (Sign In identifier), Click (Sign In button)
+          cy.get('.css-10n548d').click()
+          cy.url()
+            .should("include", "/login")
+
+//        Interact with form to input email
+//        Interact with form to input password
+
+          cy.get(":nth-child(1) > .signupInputField").type("fake14email@noemail.com")
+          cy.get(":nth-child(2) > .signupInputField").type("Z987654321#")
+
+//        Click Login button
+          cy.get(".py1-and-half").click()
+//      Validate user is logged in
 //        adjust settings
 //        skip
 //        skip
@@ -83,7 +92,7 @@ describe("SignUp Flow", function() {
 
 //        add to README setup instructions
 
-/if role = "button" with text "Start a Base" exists click()
+//if role = "button" with text "Start a Base" exists click()
     })
 })
 
